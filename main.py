@@ -15,7 +15,7 @@ class Point:
         self.y = y_init
 
     def serialize(self):
-        return {"x": self.x, "y": self.y}
+        return {"time": self.x, "value": self.y}
 
 
 # класс для хранения информации об оборудовании
@@ -77,11 +77,10 @@ for i in equipmentList:
 result = json.dumps([m.serialize() for m in equipment],
                     ensure_ascii=False,
                     default=str),
-print(result[0])
 # сохраняем в файл
-# f = open("result.json", "w")
-#
-# for i in result:
-#     f.write(i)
-#
-# f.close()
+f = open("result.json", "w")
+f.write(f'{{"period":{Config.time_period},')
+f.write('"equipment":')
+f.write(result[0])
+f.write('}')
+f.close()
