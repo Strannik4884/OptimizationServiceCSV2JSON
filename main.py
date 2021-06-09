@@ -3,6 +3,9 @@ import json
 
 
 # класс для хранения значения выделяемой тепловой мощности в момент времени x
+from config import Config
+
+
 class Point:
     x = None
     y = None
@@ -59,10 +62,9 @@ def convertOffsetsToDict(local_offsets, keys):
 
 
 # парсим данные из csv-файла
-equipmentList = parseCSV('SourceData.csv')
-offsetsValues = [0, -6, 9, -15, -12, 7, 12, -3]
+equipmentList = parseCSV(Config.source_file)
 # формируем смещения
-offsets = convertOffsetsToDict(offsetsValues, equipmentList.keys())
+offsets = convertOffsetsToDict(Config.offsets, equipmentList.keys())
 # формируем объекты оборудования
 equipment = []
 for i in equipmentList:
